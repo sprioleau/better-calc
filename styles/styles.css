@@ -1,0 +1,86 @@
+@font-face {
+  font-family: 'San Francisco';
+  src: url('../fonts/sfuitext-regular.woff2') format('woff2'),
+    url('../fonts/sfuitext-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --black: hsl(0, 0%, 0%);
+  --white: hsl(0, 0%, 100%);
+  --num-key-color: hsl(0, 0%, 20%);
+  --util-key-color: hsl(0, 0%, 65%);
+  --operation-key-color: hsl(34, 98%, 53%);
+  --font-size: 4vmin;
+  --font-family: 'San Francisco', sans-serif;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100vmin;
+  background-color: var(--num-key-color);
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+}
+
+.calc {
+  border-radius: 3vmin;
+  display: grid;
+  grid-template-columns: repeat(4, 10vmin);
+  grid-template-rows: minmax(12vmin, auto) repeat(5, 10vmin);
+  gap: 2vmin;
+  margin: 0 auto;
+  padding: 15vmin 3vmin 4vmin;
+  background-color: var(--black);
+}
+
+.calc__operands {
+  font-size: 4vmin;
+  grid-column: span var(--span);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 1.5vmin;
+}
+
+.calc__operand.current {
+  font-size: 8vmin;
+}
+
+.calc__key {
+  --text-color: var(--white);
+  --bg-color: var(--num-key-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10vmin;
+  text-align: center;
+}
+
+.util {
+  color: var(--black);
+  background-color: var(--util-key-color);
+}
+
+.num {
+  color: var(--white);
+  background-color: var(--num-key-color);
+}
+
+.num.zero {
+  grid-column: span 2;
+  justify-content: flex-start;
+  padding-left: calc(4vmin - 2px);
+}
+
+.operation {
+  background-color: var(--operation-key-color);
+  font-size: 5vmin;
+}
