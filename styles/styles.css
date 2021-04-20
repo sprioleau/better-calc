@@ -8,12 +8,14 @@
 
 :root {
   --black: hsl(0, 0%, 0%);
+  --ui-bg: rgba(107, 4, 241, 0.87);
   --white: hsl(0, 0%, 100%);
-  --num-key-color: hsl(0, 0%, 20%);
-  --util-key-color: hsl(0, 0%, 65%);
-  --operation-key-color: hsl(34, 98%, 53%);
-  --font-size: 4vmin;
+  --gray-dark: hsl(0, 0%, 20%);
+  --gray-light: hsl(0, 0%, 65%);
+  --orange: hsl(34, 98%, 53%);
   --font-family: 'San Francisco', sans-serif;
+  --button-size: 10vmin;
+  --font-size: calc((var(--button-size) * 4 / 10));
 }
 
 body {
@@ -21,7 +23,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vmin;
-  background-color: var(--num-key-color);
+  background-color: var(--ui-bg);
   display: grid;
   place-items: center;
   color: var(--white);
@@ -29,25 +31,44 @@ body {
   font-family: var(--font-family);
 }
 
-.calc {
-  border-radius: 3vmin;
-  display: grid;
-  grid-template-columns: repeat(4, 10vmin);
-  grid-template-rows: minmax(12vmin, auto) repeat(5, 10vmin);
-  gap: 2vmin;
-  margin: 0 auto;
-  padding: 15vmin 3vmin 4vmin;
-  background-color: var(--black);
+button {
+  border: 0;
+  box-shadow: none;
+  appearance: none;
+  outline: none;
 }
 
-.calc__operands {
-  font-size: 4vmin;
+.calc {
+  border-radius: var(--font-size);
+  display: grid;
+  grid-template-columns: repeat(4, var(--button-size));
+  grid-template-rows: var(--button-size) calc(var(--button-size) * 1.5) repeat(5, var(--button-size));
+  gap: calc(var(--button-size) / 5);
+  margin: 0 auto;
+  padding: calc((var(--button-size) * 3 / 10));
+  background-color: var(--black);
+  max-height: 90vh;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:focus {
+  box-shadow: 0 0 0 2px var(--black), 0 0 0 4px var(--ui-bg);
+}
+
+.calc__operand {
+  font-size: var(--font-size);
   grid-column: span var(--span);
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 calc(var(--button-size) / 10);
+}
+
+.calc__operand.previous {
   align-items: flex-end;
-  justify-content: space-around;
-  padding: 1.5vmin;
 }
 
 .calc__operand.current {
@@ -56,31 +77,41 @@ body {
 
 .calc__key {
   --text-color: var(--white);
-  --bg-color: var(--num-key-color);
+  --bg-color: var(--gray-dark);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10vmin;
+  border-radius: var(--button-size);
   text-align: center;
+  font-size: var(--font-size);
 }
 
 .util {
   color: var(--black);
-  background-color: var(--util-key-color);
+  background-color: var(--gray-light);
 }
 
-.num {
+.util.inverse {
+  background-image: url(../images/inverse.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: var(--font-size);
+}
+
+.num,
+.decimal {
   color: var(--white);
-  background-color: var(--num-key-color);
+  background-color: var(--gray-dark);
 }
 
 .num.zero {
   grid-column: span 2;
   justify-content: flex-start;
-  padding-left: calc(4vmin - 2px);
+  padding-left: calc(var(--font-size) - 2px);
 }
 
 .operation {
-  background-color: var(--operation-key-color);
-  font-size: 5vmin;
+  background-color: var(--orange);
+  color: var(--white);
+  font-size: calc(var(--font-size) * 1.25);
 }
